@@ -1,172 +1,118 @@
-# oh-my-zsh setup
-ZSH_THEME="spaceship"
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Cloning necessary plugins
-# git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-# ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-z
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="apple"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)
+
+source "$ZSH/oh-my-zsh.sh"
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch $(uname -m)"
+
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# =========================================
+# PATH
+# =========================================
+export BUN_INSTALL="$HOME/.bun"
+
+typeset -U path PATH
+path=(
+  $HOME/.local/bin
+  $BUN_INSTALL/bin
+  $path
 )
 
-# Source oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-# -------------------------------- #
-# Node Package Manager (NPM) Aliases
-# https://github.com/antfu/ni
-# -------------------------------- #
-
-alias nio="ni --prefer-offline"
-alias s="nr start"
-alias d="nr dev"
-alias b="nr build"
-alias bw="nr build --watch"
-alias t="nr test"
-alias tu="nr test -u"
-alias tw="nr test --watch"
-alias w="nr watch"
-alias p="nr play"
-alias c="nr typecheck"
-alias lint="nr lint"
-alias lintf="nr lint --fix"
-alias release="nr release"
-alias re="nr release"
-
-# -------------------------------- #
-# Git Aliases
-# -------------------------------- #
-
-alias git=hub
-alias grt='cd "$(git rev-parse --show-toplevel)"'
-
-alias gs='git status'
-alias gp='git push'
-alias gpf='git push --force'
-alias gpft='git push --follow-tags'
-alias gpl='git pull --rebase'
-alias gcl='git clone'
-alias gst='git stash'
-alias grm='git rm'
-alias gmv='git mv'
-
-alias main='git checkout main'
-
-alias gco='git checkout'
-alias gcob='git checkout -b'
-
-alias gb='git branch'
-alias gbd='git branch -d'
-
-alias grb='git rebase'
-alias grbom='git rebase origin/master'
-alias grbc='git rebase --continue'
-
-alias gl='git log'
-alias glo='git log --oneline --graph'
-
-alias grh='git reset HEAD'
-alias grh1='git reset HEAD~1'
-
-alias ga='git add'
-alias gA='git add -A'
-
-alias gc='git commit'
-alias gcm='git commit -m'
-alias gca='git commit -a'
-alias gcam='git add -A && git commit -m'
-alias gfrb='git fetch origin && git rebase origin/master'
-
-alias gxn='git clean -dn'
-alias gx='git clean -df'
-
-alias gsha='git rev-parse HEAD | pbcopy'
-
-alias ghci='gh run list -L 1'
-
-# Git Functions
-function glp() {
-  git --no-pager log -$1
-}
-
-function gd() {
-  if [[ -z $1 ]]; then
-    git diff --color | diff-so-fancy
-  else
-    git diff --color $1 | diff-so-fancy
-  fi
-}
-
-function gdc() {
-  if [[ -z $1 ]]; then
-    git diff --color --cached | diff-so-fancy
-  else
-    git diff --color --cached $1 | diff-so-fancy
-  fi
-}
-
-# -------------------------------- #
-# Directory Navigation Functions
-# -------------------------------- #
-
-function i() {
-  cd ~/i/$1
-}
-
-function repros() {
-  cd ~/r/$1
-}
-
-function forks() {
-  cd ~/f/$1
-}
-
-function pr() {
-  if [ $1 = "ls" ]; then
-    gh pr list
-  else
-    gh pr checkout $1
-  fi
-}
-
-function dir() {
-  mkdir $1 && cd $1
-}
-
-function clone() {
-  if [[ -z $2 ]]; then
-    hub clone "$@" && cd "$(basename "$1" .git)"
-  else
-    hub clone "$@" && cd "$2"
-  fi
-}
-
-function clonei() {
-  i && clone "$@" && code . && cd -
-}
-
-function cloner() {
-  repros && clone "$@" && code . && cd -
-}
-
-function clonef() {
-  forks && clone "$@" && code . && cd -
-}
-
-function codei() {
-  i && code "$@" && cd -
-}
-
-function serve() {
-  if [[ -z $1 ]]; then
-    live-server dist
-  else
-    live-server $1
-  fi
-}
+# bun completions
+[[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
